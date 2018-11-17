@@ -29,13 +29,19 @@ client.connect((err) => {
     // },(err) =>{
     //     console.log('Unable to fetch todos',err);
     // });
+
     db.collection('Users').insertOne({name : 'Mueen', age :25 , location :'Kl'},(err,result) =>{
         if (err){
             return console.log('Unable to insert data');
         }
         console.log("Data successfully inserted");
     });
-
+    db.collection('Users').insertOne({name : 'Mutaz', age :26 , location :'Penang'},(err,result) =>{
+        if (err){
+            return console.log('Unable to insert data');
+        }
+        console.log("Data successfully inserted");
+    });
     db.collection('Users').find({name : 'Mueen'}).toArray().then((docs) =>{
         console.log('fetching the doc');
         console.log(JSON.stringify(docs,undefined,2));
