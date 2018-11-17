@@ -42,6 +42,12 @@ client.connect((err) => {
         }
         console.log("Data successfully inserted");
     });
+    db.collection('Users').insertOne({name : 'Mo', age :26 , location :'Yemen'},(err,result) =>{
+        if (err){
+            return console.log('Unable to insert data');
+        }
+        console.log("Data successfully inserted");
+    });
     db.collection('Users').find({name : 'Mueen'}).toArray().then((docs) =>{
         console.log('fetching the doc');
         console.log(JSON.stringify(docs,undefined,2));
