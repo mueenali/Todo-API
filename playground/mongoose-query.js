@@ -33,7 +33,7 @@ User.findById(id).then((user) =>{
     if (!user){
       return console.log('User was not found');
     }
-    console.log('User : ', JSON.stringify(user,undefined,2)); 
+    console.log('User : ', JSON.stringify(user,undefined,2));
 }).catch((err) =>{
     console.log(err);
 });
