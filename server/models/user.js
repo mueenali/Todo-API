@@ -4,6 +4,7 @@ const passwordValidator = require('password-validator');
 var Schema = mongoose.Schema;
 const jwt = require('jsonwebtoken');
 const _ = require('lodash');
+const bcrypt = require('bcryptjs');
 var schema = new passwordValidator();
 schema.has().uppercase();
 
@@ -73,6 +74,21 @@ UserSchema.statics.findByToken = function (token) {
         'tokens.access' : 'auth'
     });
 };
+
+
+UserSchema.pre('save',function (next) {
+    var user = this;
+    if (user.isModified('password')){
+        bcrypt.genSalt(10, function(err, salt) {
+            bcrypt.hash(user.password, salt, function(err, hash) {
+                user.password = hash;
+                next();
+            });
+        });
+    }else {
+        next();
+    }
+});
 
 var User = mongoose.model('User',UserSchema);
 module.exports = {User};
