@@ -1,5 +1,5 @@
 require('./config/config');
-
+const {authenticate} = require('./middleware/authenticate');
 const express = require('express');
 const bodyParser = require('body-parser');
 const {ObjectID} = require('mongodb');
@@ -102,8 +102,16 @@ app.post('/users',(req,res) =>{
 });
 
 
+
+
+app.get('/users/me',authenticate,(req,res) =>{
+    res.send(req.user);
+});
+
+
 app.listen(port,() =>{
     console.log(`Started on port ${port}`);
 });
 
 module.exports = {app};
+
