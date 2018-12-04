@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+const {ObjectID} = require('mongodb');
 
 var TodoSchema = new Schema({
     text : {
@@ -15,6 +16,10 @@ var TodoSchema = new Schema({
     completedAt :{
         type : Number,
         default: null
+    },
+    _creator :{
+        type : ObjectID,
+        required: true
     }
 });
 var Todo = mongoose.model('Todo',TodoSchema);
